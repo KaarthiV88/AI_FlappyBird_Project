@@ -36,4 +36,36 @@ class Bird:
     def move(self):
         self.tickCount += 1
         displacement = self.velocity * self.tickCount + 0.5*3*self.tickCount**2
+        
+        if(displacement >= 16):
+            displacement = 16
+            
+        if(d < 0):
+            d -= 1.75
+            
+        self.y += displacement
+        if(d<0 or self.y < (self.height+50)):
+            if(self.tilt < self.maxRotation):
+                self.tilt = self.maxRotation
+                
+        else:
+            if(self.tilt > -90):
+                self.tilt -= self.rotationVelocity
+                
+    
+    def draw(self, win):
+        self.imgCount += 1
+        if(self.imgCount < self.aniTime):
+            self.img = self.IMGS[0]
+        elif(self.imgCount < (self.aniTime*2)):
+            self.img = self.IMGS[1]
+        elif(self.imgCount < (self.aniTime*3)):
+            self.img = self.IMGS[2]
+        elif(self.imgCount < (self.aniTime*4)):
+            self.img = self.IMGS[1]
+        elif(self.imgCount == ((self.aniTime*4)+1)):
+            self.img = self.IMGS[0]
+            self.imgCount = 0
+            
+            
 
