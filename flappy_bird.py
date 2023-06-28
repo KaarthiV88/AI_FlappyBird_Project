@@ -134,7 +134,7 @@ class Pipe:
             return False
         
         
-class Base:
+class Ground:
     velocity = 5
     width = GROUND_IMG.get_width()
     IMG = GROUND_IMG
