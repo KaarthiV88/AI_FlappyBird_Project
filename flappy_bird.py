@@ -7,7 +7,7 @@ import math
 import numpy as np
 
 windowWidth = 800
-windowHeight = 1000
+windowHeight = 800  
 
 
 BIRD_IMGS = [pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs", "bird1.png"))),pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs", "bird2.png"))), pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs", "bird3.png")))] 
@@ -134,6 +134,8 @@ class Pipe:
             return False
         
         
+        
+        
 class Ground:
     velocity = 5
     width = GROUND_IMG.get_width()
@@ -158,13 +160,20 @@ class Ground:
         window.blit(self.IMG, (self.x1, self.y))
         window.blit(self.IMG, (self.x2, self.y))
 
-def draw_window(win, bird): 
+def draw_window(win, bird, pipes, ground): 
     win.blit(BG_IMG, (-10,-10))
+    
+    for p in pipes:
+        p.draw(win)
+        
+    ground.draw(win)
     bird.draw(win)
     pygame.display.update()
     
 def main():
-    bird = Bird(200, 200)
+    bird = Bird(240, 365)
+    ground = Ground(750)
+    pipes = [Pipe(775)]
     window = pygame.display.set_mode((windowWidth, windowHeight))
     run = True
     
@@ -173,7 +182,29 @@ def main():
             if(event.type == pygame.QUIT):
                 run = False
         
-        draw_window(window, bird)
+        remove = []
+        add_pipe = False
+        
+        for p in pipes:
+            if p.collision(bird):
+                pass
+            
+            if(p.x + p.PIPE_TOP.get_width() < 0):
+                remove.append(p)
+            
+            if(not p.passed and p.x < bird.x):
+                p.passed = True
+                add_pipe = True
+        
+        if(add_pipe == True):
+            score += 1
+            pipes.append(Pipe(775))
+            
+            for i in remove:
+                pipes.remove(i)
+            p.move()
+        ground.move()
+        draw_window(window, bird, pipes, ground)
     
     pygame.quit()
     quit()
