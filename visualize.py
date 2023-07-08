@@ -6,6 +6,7 @@ import warnings
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 
 def plot_stats(statistics, ylog=False, view=False, filename='avg_fitness.svg'):
