@@ -18,15 +18,15 @@ pygame.font.init()  # init font
 WIN_WIDTH = 600
 WIN_HEIGHT = 800
 FLOOR = 730
-STAT_FONT = pygame.font.SysFont("comicsans", 50)
-END_FONT = pygame.font.SysFont("comicsans", 70)
+STAT_FONT = pygame.font.Font(None, 50)  # Use pygame default font
+END_FONT = pygame.font.Font(None, 70)   # Use pygame default font
 DRAW_LINES = False
 
 WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-pygame.display.set_caption("Flappy Bird")
+pygame.display.set_caption("AI Flappy Bird")
 
 pipe_img = pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs","FBpipe.png")).convert_alpha())
-bg_img = pygame.transform.scale(pygame.image.load(os.path.join("FB_Imgs","FBbg.png")).convert_alpha(), (600, 900))
+bg_img = pygame.transform.scale(pygame.image.load(os.path.join("FB_Imgs","FBbg.jpeg")).convert_alpha(), (600, 900))
 bird_images = [pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs","bird" + str(x) + ".png"))) for x in range(1,4)]
 base_img = pygame.transform.scale2x(pygame.image.load(os.path.join("FB_Imgs","FBground.png")).convert_alpha())
 
